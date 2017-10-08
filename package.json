@@ -4,6 +4,9 @@
   "private": true,
   "author": "hash-gaming",
   "description": "Mostly productive but sometimes trolly",
+  "scripts": {
+    "linter": "eslint ."
+  },
   "dependencies": {
     "hubot": "2.19.0",
     "hubot-diagnostics": "0.0.2",
