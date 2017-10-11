@@ -6,7 +6,7 @@
 // Configuration:
 //
 // Commands:
-// lit <message_link> - Immortalizes a message in #lit... fam
+// randbot lit <message_link> - Immortalizes a message in #lit... fam
 //
 // Author:
 //   mikestephens/harasho
