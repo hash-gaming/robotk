@@ -10,5 +10,4 @@
 // Author:
 //   YashdalfTheGray
 
-module.exports = (robot) => {
-};
+module.exports = (robot) => {};

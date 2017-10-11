@@ -12,13 +12,13 @@ available, etc!
 [hubot]: http://hubot.github.com
 [generator-hubot]: https://github.com/github/generator-hubot
 
-### Running gaming-bot Locally
+### Running randbot Locally
 
 You can test your hubot by running the following, however some plugins will not
 behave as expected unless the [environment variables](#configuration) they rely
 upon have been set.
 
-You can start gaming-bot locally by running:
+You can start randbot locally by running:
 
     % bin/hubot
 
@@ -27,11 +27,11 @@ You'll see some start up output and a prompt:
     [Sat Feb 28 2015 12:38:27 GMT+0000 (GMT)] INFO Using default redis on localhost:6379
     randbot>
 
-Then you can interact with gaming-bot by typing `gaming-bot help`.
+Then you can interact with randbot by typing `randbot help`.
 
     randbot> randbot help
     randbot animate me <query> - The same thing as `image me`, except adds [snip]
-    randbot help - Displays all of the help commands that gaming-bot knows about.
+    randbot help - Displays all of the help commands that randbot knows about.
     ...
 
 ### Configuration

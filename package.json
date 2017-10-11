@@ -5,7 +5,10 @@
   "author": "hash-gaming",
   "description": "Mostly productive but sometimes trolly",
   "scripts": {
-    "linter": "eslint ."
+    "linter": "eslint .",
+    "local-server-start": "docker-compose up --build --force-recreate",
+    "local-server-stop": "docker-compose down",
+    "start": "./bin/hubot --name randbot"
   },
   "dependencies": {
     "hubot": "2.19.0",
