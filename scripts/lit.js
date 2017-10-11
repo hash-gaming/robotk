@@ -6,7 +6,7 @@
 // Configuration:
 //
 // Commands:
-// lit [slack url]
+// lit <message_link> - Immortalizes a message in #lit
 //
 // Author:
 //   mikestephens/harasho
