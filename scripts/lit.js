@@ -1,19 +1,19 @@
 // Description:
-//   a collection of general gamebot functions
+//   a helpful tool for posting #lit comments
 //
 // Dependencies:
 //
 // Configuration:
 //
 // Commands:
-// lit
+// lit [slack url]
 //
 // Author:
 //   mikestephens/harasho
 
 module.exports = function (robot) {
     robot.hear(/lit (.*)/i, (res) => {
-        // Do shit here
+        // TODO: make this a configurable value
         if (res.match[1].includes('https://hashtaggaming.slack.com/archives/')) {
             res.send('I gotchu fam');
             robot.messageRoom('lit', res.match[1]);
