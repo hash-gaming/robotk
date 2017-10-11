@@ -9,14 +9,14 @@
 //
 // Commands:
 //   randbot pug me - Receive a pug
-//   randbot pug bomb N - get N pugs (max 20)
+//   randbot pug bomb N - get N pugs (max 10)
 
 module.exports = function (robot) {
   robot.respond(/pug me/i, msg => msg.http('http://pugme.herokuapp.com/random').get()((err, res, body) => msg.send(JSON.parse(body).pug)));
   robot.respond(/pug bomb( (\d+))?/i, (msg) => {
     let count;
-    if (parseInt(msg.match[2]) > 20) {
-      count = 20;
+    if (parseInt(msg.match[2]) > 10) {
+      count = 10;
     }
     else {
       count = msg.match[2] || 5;
@@ -36,5 +36,6 @@ module.exports = function (robot) {
       return results;
     });
   });
-  return robot.respond(/how many pugs are there/i, msg => msg.http('http://pugme.herokuapp.com/count').get()((err, res, body) => msg.send(`There are ${JSON.parse(body).pug_count} pugs.`)));
+  return robot.respond(/how many pugs are there/i, msg =>
+    msg.http('http://pugme.herokuapp.com/count').get()((err, res, body) => msg.send(`There are ${JSON.parse(body).pug_count} pugs.`)));
 };
