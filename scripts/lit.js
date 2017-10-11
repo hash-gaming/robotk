@@ -12,7 +12,7 @@
 //   mikestephens/harasho
 
 module.exports = function (robot) {
-  robot.hear(/lit (.*)/i, (res) => {
+  robot.respond(/lit (.*)/i, (res) => {
     // TODO: make this a configurable value
     if (res.match[1].includes('https://hashtaggaming.slack.com/archives/')) {
       res.send('I gotchu fam');
