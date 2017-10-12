@@ -11,7 +11,7 @@
 // Author:
 //   mikestephens/harasho
 
-module.exports = function (robot) {
+module.exports = (robot) => {
   robot.respond(/lit (.*)/i, (res) => {
     // TODO: make this a configurable value
     if (res.match[1].includes('https://hashtaggaming.slack.com/archives/')) {
