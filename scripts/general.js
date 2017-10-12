@@ -10,4 +10,4 @@
 // Author:
 //   YashdalfTheGray
 
-module.exports = (robot) => {};
+module.exports = (robot) => {}; // eslint-disable-line no-unused-vars
