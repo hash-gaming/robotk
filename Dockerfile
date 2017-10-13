@@ -1,6 +1,6 @@
 FROM node:8
 
-ENV HUBOT_NAME robotk
+ENV HUBOT_NAME RoboTK
 
 ADD . /opt/
 WORKDIR /opt
