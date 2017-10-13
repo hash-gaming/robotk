@@ -6,10 +6,10 @@
 // Configuration:
 //
 // Commands:
-// lit <message_link> - Immortalizes a message in #lit... fam
+// RoboTK lit <message_link> - Immortalizes a message in #lit... fam
 //
 // Author:
-//   mikestephens/harasho
+//   harasho
 
 module.exports = (robot) => {
   robot.respond(/lit (.*)/i, (res) => {

@@ -8,6 +8,6 @@
 // Commands:
 //
 // Author:
-//   YashdalfTheGray
+//   YashdalfTheGray and harasho
 
 module.exports = (robot) => {}; // eslint-disable-line no-unused-vars
