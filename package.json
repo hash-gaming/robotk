@@ -1,5 +1,5 @@
 {
-  "name": "randbot",
+  "name": "robotk",
   "version": "1.0.0",
   "private": true,
   "author": "hash-gaming",
@@ -8,7 +8,8 @@
     "linter": "eslint .",
     "local-server-start": "docker-compose up --build --force-recreate",
     "local-server-stop": "docker-compose down",
-    "start": "./bin/hubot --name randbot"
+    "start": "./bin/hubot --name robotk",
+    "test": "echo \"coming soon\""
   },
   "dependencies": {
     "hubot": "2.19.0",
