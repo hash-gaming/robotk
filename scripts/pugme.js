@@ -19,7 +19,7 @@ module.exports = function (robot) {
   });
   robot.respond(/pug bomb( (\d+))?/i, (msg) => {
     console.log(msg.match[2]);
-    const count = parseInt(msg.match[2], 10) > 10 ? 10 : msg.match[2] || 5;
+    const count = parseInt(msg.match[2], 10) > 10 ? 10 : parseInt(msg.match[2], 10) || 5;
 
     return msg.http(`http://pugme.herokuapp.com/bomb?count=${count}`).get()((err, res, body) => {
       JSON.parse(body).pugs.forEach(p => msg.send(p));
