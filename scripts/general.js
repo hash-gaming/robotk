@@ -10,4 +10,13 @@
 // Author:
 //   YashdalfTheGray
 
-module.exports = (robot) => {}; // eslint-disable-line no-unused-vars
+module.exports = (robot) => {
+  robot.hear(/^randbot:? (.+)/i, (res) => {
+    res.reply([
+      'That was my old form.',
+      'I have become perfect.',
+      'I am become RoboTK.',
+      'You shall address me as such.'
+    ].join(' '));
+  });
+};
