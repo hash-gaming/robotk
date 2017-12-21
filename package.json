@@ -21,6 +21,7 @@
     "hubot-rules": "0.1.2",
     "hubot-scripts": "2.17.2",
     "hubot-slack": "4.4.0",
+    "lodash": "4.17.4",
     "request-promise": "4.2.2"
   },
   "engines": {
