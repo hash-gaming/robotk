@@ -11,15 +11,23 @@
 // Author:
 //   mikestephens/harasho
 
+// TODO: make this a configurable value
+// Just for the time being, let's keep these separate.
+const channel = 'lit';
+const failureMessage = "The fuck you talking 'bout fam?";
+const successMessage = 'I gotchu fam';
+const validURL = 'https://hashtaggaming.slack.com/archives/';
+
 module.exports = (robot) => {
   robot.respond(/lit (.*)/i, (res) => {
-    // TODO: make this a configurable value
-    if (res.match[1].includes('https://hashtaggaming.slack.com/archives/')) {
-      res.send('I gotchu fam');
-      robot.messageRoom('lit', res.match[1]);
+    const param = res.match[1];
+
+    if (param.includes(validURL)) {
+      res.send(successMessage);
+      robot.messageRoom(channel, param);
     }
     else {
-      res.send("The fuck you talking 'bout fam?");
+      res.send(failureMessage);
     }
   });
 };
