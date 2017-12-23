@@ -12,6 +12,7 @@
 // Author:
 //   mikestephens/harasho
 
+const { lit } = require('../i18n/en/responses.json');
 const _ = require('lodash');
 
 const hasAttachments = rawMessage => _.get(rawMessage, 'attachments.length', 0) > 0;
@@ -19,8 +20,6 @@ const hasAttachments = rawMessage => _.get(rawMessage, 'attachments.length', 0) 
 // TODO: make this a configurable value
 // Just for the time being, let's keep these separate.
 const channel = 'lit';
-const failureMessage = "The fuck you talking 'bout fam?";
-const successMessage = 'I gotchu fam';
 const validURL = 'https://hashtaggaming.slack.com/archives/';
 
 module.exports = (robot) => {
@@ -32,11 +31,11 @@ module.exports = (robot) => {
     }
 
     if (param !== undefined && param.includes(validURL)) {
-      res.send(successMessage);
+      res.send(res.random(lit.success));
       robot.messageRoom(channel, param);
     }
     else {
-      res.send(failureMessage);
+      res.send(res.random(lit.failure));
     }
   });
 };
