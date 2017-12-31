@@ -1,0 +1,6 @@
+{
+  "automod": {
+    "discussionChannelPurpose": "This channel’s purpose is to discuss and vote on a #{MEMBER_NAME}’s membership to #core. Please take some time to vote and voice any notes or concerns about #{MEMBER_NAME}. We will give everyone at least 24 hours to respond. A non response will result in your opinion not being accounted for. After the discussion and poll this channel will self destruct.",
+    "discussionPoll": "/poll \"Should we invite #{MEMBER_NAME} to #core?\" \"Yes\" \"No\""
+  }
+}
