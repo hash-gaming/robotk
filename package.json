@@ -12,6 +12,7 @@
     "test": "echo \"coming soon\""
   },
   "dependencies": {
+    "dotenv": "4.0.0",
     "hubot": "2.19.0",
     "hubot-diagnostics": "0.0.2",
     "hubot-hello": "0.0.1",
