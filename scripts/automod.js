@@ -32,7 +32,13 @@ module.exports = (robot) => {
       const discussionGroup = await createOrUnarchiveGroup(SLACK_API_TOKEN, channelName);
 
       describeResponse.group.members.map(m => inviteUser(SLACK_API_TOKEN, discussionGroup.id, m));
-      res.send('Creating private group to discuss.');
+      res.send([
+        'Creating private group to discuss.',
+        'Psst. Copy and paste this message into the discussion.',
+        '```',
+        automod.pollMessage.replace(/#{MEMBER_NAME}/g, userName),
+        '```'
+      ].join('\n'));
 
       await setPurpose(
         SLACK_API_TOKEN,
