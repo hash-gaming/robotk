@@ -1,6 +1,6 @@
 {
   "name": "robotk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "author": "hash-gaming",
   "description": "Mostly productive but sometimes trolly",
@@ -9,7 +9,7 @@
     "local-server-start": "docker-compose up --build --force-recreate",
     "local-server-stop": "docker-compose down",
     "start": "./bin/hubot --name robotk",
-    "test": "echo \"coming soon\""
+    "test": "mocha ./**/*.spec.js"
   },
   "dependencies": {
     "dotenv": "4.0.0",
@@ -21,14 +21,19 @@
     "hubot-rules": "0.1.2",
     "hubot-scripts": "2.17.2",
     "hubot-slack": "4.4.0",
+    "lodash": "4.17.4",
     "request-promise": "4.2.2"
   },
   "engines": {
     "node": ">=8.0.0"
   },
   "devDependencies": {
+    "chai": "4.1.2",
+    "co": "4.6.0",
     "eslint": "4.8.0",
     "eslint-config-airbnb-base": "12.0.2",
-    "eslint-plugin-import": "2.7.0"
+    "eslint-plugin-import": "2.7.0",
+    "hubot-test-helper": "1.8.1",
+    "mocha": "4.0.1"
   }
 }
