@@ -14,7 +14,7 @@ describe('robotk general', () => {
   });
 
   context('user calls robotk by the wrong name', () => {
-    beforeEach(() => co(function* () {
+    beforeEach(() => co(function* userSay() {
       yield this.room.user.say('alice', "randbot: i don't even know who you are any more");
     }.bind(this)));
 
