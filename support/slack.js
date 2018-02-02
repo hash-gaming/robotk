@@ -57,8 +57,8 @@ async function inviteUser(token, channel, user) {
 async function describeUser(token, user) {
   return request({
     url: 'https://slack.com/api/users.info',
-    method: 'POST',
-    form: { token, user },
+    method: 'GET',
+    qs: { token, user },
     json: true
   });
 }
