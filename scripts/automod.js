@@ -1,3 +1,15 @@
+// Description:
+//   a helpful tool to make the bot do all the dirty work for you.
+//
+// Dependencies:
+//
+// Configuration:
+//
+// Commands:
+//
+// Author:
+//   hash-gaming
+
 require('dotenv').config();
 
 const wrap = require('../support/wrapAsync');
