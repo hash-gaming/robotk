@@ -3,14 +3,15 @@ const {
   createOrUnarchiveGroup,
   inviteUser,
   setPurpose,
-  postMessage
+  postMessage,
+  parseUsername
 } = require('../support/slack');
 const { automod } = require('../support/strings');
 
 // this async function doesn't have a try/catch, which you would need otherwise
 // because we use the wrap function to forward errors to the client.
 module.exports = async function discuss(req, res) {
-  const userName = req.body.text.replace('@', '');
+  const { userName } = parseUsername(req.body.text);
   const channelName = `discuss_${userName}`;
   const { SLACK_API_TOKEN } = process.env;
 
