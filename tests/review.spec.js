@@ -40,7 +40,7 @@ describe('robotk review', () => {
       const game = response[0];
 
       expect(this.room.messages.length).to.equal(2);
-      expect(this.room.messages[1][1]).to.equal(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`);
+      expect(this.room.messages[1][1]).to.equal(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`); // eslint-disable-line max-len
     });
   });
 });
