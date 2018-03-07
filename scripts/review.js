@@ -35,7 +35,7 @@ module.exports = (robot) => {
       'url'
     ])
     .then((response) => {
-      _.forEach(response.body, game => res.send(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`));
+      _.forEach(response.body, game => res.send(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`)); // eslint-disable-line max-len
     })
     .catch((err) => {
       res.send('OMG, I just had a brain fart... Someone hug me :(');
