@@ -21,7 +21,10 @@ describe('robotk review', () => {
   beforeEach(() => {
     nock('https://api-endpoint.igdb.com')
     .get('/games/?limit=5&offset=0&order=rating:desc&search=test&fields=name,rating,cover,summary,url')
-    .reply(200, response);
+    .reply(200, response)
+
+    .get('/games/?limit=5&offset=0&order=rating:desc&search=test&fields=name,rating,cover,summary,url')
+    .reply(404, {});
 
     this.room = helper.createRoom();
   });
@@ -40,7 +43,17 @@ describe('robotk review', () => {
       const game = response[0];
 
       expect(this.room.messages.length).to.equal(2);
-      expect(this.room.messages[1][1]).to.equal(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`); // eslint-disable-line max-len
+      expect(this.room.messages[1][1]).to.equal([
+        `*${game.name}* with the rating of ${Math.round(game.rating) / 10}`,
+        `${game.summary}`,
+        '',
+        `Cover: ${game.cover.url}`,
+        `URL: ${game.url}`].join('\n'));
+    });
+
+    it('should compose review message successfully', () => {
+      expect(this.room.messages.length).to.equal(2);
+      expect(this.room.messages[1][1]).to.equal('OMG, I just had a brain fart... Someone hug me :(');
     });
   });
 });

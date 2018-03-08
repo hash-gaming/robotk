@@ -19,27 +19,33 @@ const igdb = require('igdb-api-node').default;
 const client = igdb();
 
 module.exports = (robot) => {
-  robot.respond(/review\s?(.*)?/i, (res) => {
+  robot.respond(/review\s?(.*)?/i, async (res) => {
     const param = res.match[1];
 
-    client.games({
-      limit: 5,
-      offset: 0,
-      order: 'rating:desc',
-      search: param
-    }, [
-      'name',
-      'rating',
-      'cover',
-      'summary',
-      'url'
-    ])
-    .then((response) => {
-      _.forEach(response.body, game => res.send(`*${game.name}* with the rating of ${Math.round(game.rating) / 10}\n${game.summary}\n\nCover: ${game.cover.url}\nURL: ${game.url}`)); // eslint-disable-line max-len
-    })
-    .catch((err) => {
+    try {
+      const response = await client.games({
+        limit: 5,
+        offset: 0,
+        order: 'rating:desc',
+        search: param
+      }, [
+        'name',
+        'rating',
+        'cover',
+        'summary',
+        'url'
+      ]);
+
+      _.forEach(response.body, game => res.send([
+        `*${game.name}* with the rating of ${Math.round(game.rating) / 10}`,
+        `${game.summary}`,
+        '',
+        `Cover: ${game.cover.url}`,
+        `URL: ${game.url}`].join('\n')));
+    }
+    catch (err) {
       res.send('OMG, I just had a brain fart... Someone hug me :(');
-      console.log(err);
-    });
+      console.error(err);
+    }
   });
 };
