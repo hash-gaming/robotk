@@ -15,7 +15,7 @@ describe('robotk lit', () => {
   });
 
   context('user requires robotk to lit invalid content', () => {
-    beforeEach(() => co(function* () {
+    beforeEach(() => co(function* userSay() {
       yield this.room.user.say('alice', '@hubot lit that');
     }.bind(this)));
 
@@ -28,7 +28,7 @@ describe('robotk lit', () => {
   context('user requires robotk to lit url', () => {
     const url = 'https://hashtaggaming.slack.com/archives/test';
 
-    beforeEach(() => co(function* () {
+    beforeEach(() => co(function* userSay() {
       yield this.room.user.say('alice', `@hubot lit ${url}`);
     }.bind(this)));
 

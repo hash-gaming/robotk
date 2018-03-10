@@ -57,8 +57,8 @@ async function inviteUser(token, channel, user) {
 async function describeUser(token, user) {
   return request({
     url: 'https://slack.com/api/users.info',
-    method: 'POST',
-    form: { token, user },
+    method: 'GET',
+    qs: { token, user },
     json: true
   });
 }
@@ -121,6 +121,21 @@ async function isUserAdmin(token, userId) {
   return user.is_admin || user.is_owner;
 }
 
+function parseUsername(userString) {
+  // userString is either @username or <@U23423HKJH|username>
+  if (/<@(\S*)\|(\S*)>/.test(userString)) {
+    const matches = /<@(\S*)\|(\S*)>/.exec(userString);
+    return {
+      userName: matches[2],
+      userId: matches[1]
+    };
+  }
+  else if (/@(\S*)/.test(userString)) {
+    return { userName: userString.replace('@', '') };
+  }
+  return {};
+}
+
 module.exports = {
   createGroup,
   archiveGroup,
@@ -134,5 +149,6 @@ module.exports = {
   setPurpose,
   postMessage,
   createOrUnarchiveGroup,
-  isUserAdmin
+  isUserAdmin,
+  parseUsername
 };
