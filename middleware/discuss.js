@@ -12,6 +12,10 @@ const { automod } = require('../support/strings');
 // because we use the wrap function to forward errors to the client.
 module.exports = async function discuss(req, res) {
   const { userName } = parseUsername(req.body.text);
+  if (!userName) {
+    res.send('You didn\'t give me a user, try the command again with an `@user`.');
+    return;
+  }
   const channelName = `discuss_${userName}`;
   const { SLACK_API_TOKEN } = process.env;
 

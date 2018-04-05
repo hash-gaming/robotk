@@ -113,6 +113,10 @@ async function createOrUnarchiveGroup(token, channelName) {
     await unarchiveGroup(token, channel.id);
   }
 
+  if (process.env.DEBUG === 'true') {
+    console.log(channel);
+  }
+
   return channel;
 }
 
