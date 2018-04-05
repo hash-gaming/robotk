@@ -17,10 +17,12 @@ const {
   verifyIncomingWebhook,
   isAdminCheck,
   discuss,
-  kickEveryone
+  kickEveryone,
+  logWhenError
 } = require('../middleware');
 
 module.exports = (robot) => {
+  robot.router.all('*', logWhenError);
   robot.router.post('/automod/discuss', verifyIncomingWebhook, wrap(isAdminCheck), wrap(discuss));
   robot.router.post('/automod/kick_everyone', verifyIncomingWebhook, wrap(isAdminCheck), wrap(kickEveryone));
 };
