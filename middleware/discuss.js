@@ -4,14 +4,14 @@ const {
   inviteUser,
   setPurpose,
   postMessage,
-  parseUsername
+  parseCommand
 } = require('../support/slack');
 const { automod } = require('../support/strings');
 
 // this async function doesn't have a try/catch, which you would need otherwise
 // because we use the wrap function to forward errors to the client.
 module.exports = async function discuss(req, res) {
-  const { userName } = parseUsername(req.body.text);
+  const { userName, fudgeFactor } = parseCommand(req.body.text);
   if (!userName) {
     res.send('You didn\'t give me a user, try the command again with an `@user`.');
     return;
@@ -25,7 +25,17 @@ module.exports = async function discuss(req, res) {
     res.send('This is a public channel, just invite yo!');
   }
   else {
-    const discussionGroup = await createOrUnarchiveGroup(SLACK_API_TOKEN, channelName);
+    let discussionGroup;
+
+    try {
+      discussionGroup = await createOrUnarchiveGroup(SLACK_API_TOKEN, channelName, fudgeFactor);
+    }
+    catch (e) {
+      if (e.message === 'SLACK_IS_DUMB') {
+        res.send(automod.slackIsDumb);
+        return;
+      }
+    }
 
     describeResponse.group.members.map(m => inviteUser(SLACK_API_TOKEN, discussionGroup.id, m));
     res.send([

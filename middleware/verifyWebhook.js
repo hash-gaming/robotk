@@ -5,6 +5,6 @@ module.exports = function verifyIncomingWebhook(req, res, next) {
     next();
   }
   else {
-    res.sendStatus(403);
+    res.send(403);
   }
 };
