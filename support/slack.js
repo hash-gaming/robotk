@@ -1,4 +1,5 @@
 const request = require('request-promise');
+const _ = require('lodash');
 
 async function createGroup(token, name) {
   return request({
@@ -104,13 +105,39 @@ async function postMessage(token, channel, text, options) {
   });
 }
 
-async function createOrUnarchiveGroup(token, channelName) {
+async function createOrUnarchiveGroup(token, channelName, fudgeFactor) {
+  const isNameTakenError = e => !e.ok && e.error === 'name_taken';
+
   const createResponse = await createGroup(token, channelName);
   const channelList = await listGroups(token);
   const channel = channelList.groups.filter(g => g.name === channelName)[0];
 
-  if (!createResponse.ok && createResponse.error === 'name_taken') {
-    await unarchiveGroup(token, channel.id);
+  if (isNameTakenError(createResponse)) {
+    // the channel apparently exists but slack has decided to not
+    // return it in the list of groups because slack is great
+    if (!channel && _.isNil(fudgeFactor)) {
+      throw new Error('SLACK_IS_DUMB');
+    }
+    else if (!channel && !_.isNil(fudgeFactor)) {
+      const fudgedChannelName = `${channelName}${fudgeFactor}`;
+
+      const response = await createGroup(token, fudgedChannelName);
+      const groupList = await listGroups(token);
+      const fudgedChannel = groupList.groups.filter(g => g.name === fudgedChannelName)[0];
+
+      if (isNameTakenError(response)) {
+        await unarchiveGroup(token, fudgedChannel.id);
+      }
+
+      return fudgedChannel;
+    }
+
+    const response = await unarchiveGroup(token, channel.id);
+    console.log(response);
+  }
+
+  if (process.env.DEBUG === 'true') {
+    console.log(channel);
   }
 
   if (process.env.DEBUG === 'true') {
@@ -140,6 +167,11 @@ function parseUsername(userString) {
   return {};
 }
 
+function parseCommand(command) {
+  const [userString, fudgeFactor] = command.split(' ');
+  return { fudgeFactor, ...parseUsername(userString) };
+}
+
 module.exports = {
   createGroup,
   archiveGroup,
@@ -154,5 +186,6 @@ module.exports = {
   postMessage,
   createOrUnarchiveGroup,
   isUserAdmin,
-  parseUsername
+  parseUsername,
+  parseCommand
 };
