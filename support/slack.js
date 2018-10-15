@@ -117,13 +117,14 @@ async function createOrUnarchiveGroup(token, channelName, fudgeFactor) {
     // return it in the list of groups because slack is great
     if (!channel && _.isNil(fudgeFactor)) {
       throw new Error('SLACK_IS_DUMB');
-    }
-    else if (!channel && !_.isNil(fudgeFactor)) {
+    } else if (!channel && !_.isNil(fudgeFactor)) {
       const fudgedChannelName = `${channelName}${fudgeFactor}`;
 
       const response = await createGroup(token, fudgedChannelName);
       const groupList = await listGroups(token);
-      const fudgedChannel = groupList.groups.filter(g => g.name === fudgedChannelName)[0];
+      const fudgedChannel = groupList.groups.filter(
+        g => g.name === fudgedChannelName
+      )[0];
 
       if (isNameTakenError(response)) {
         await unarchiveGroup(token, fudgedChannel.id);
@@ -156,8 +157,8 @@ function parseUsername(userString) {
       userName: matches[2],
       userId: matches[1]
     };
-  }
-  else if (/@(\S*)/.test(userString)) {
+    // eslint-disable-next-line no-else-return
+  } else if (/@(\S*)/.test(userString)) {
     return { userName: userString.replace('@', '') };
   }
   return {};

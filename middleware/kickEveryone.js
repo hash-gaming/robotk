@@ -13,8 +13,8 @@ module.exports = async function discuss(req, res) {
 
   await Promise.all(
     group.members
-    .filter(m => m !== req.body.user_id)
-    .map(m => kickUser(SLACK_API_TOKEN, group.id, m))
+      .filter(m => m !== req.body.user_id)
+      .map(m => kickUser(SLACK_API_TOKEN, group.id, m))
   );
 
   await leaveChannel(SLACK_API_TOKEN, group.id);
