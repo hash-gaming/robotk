@@ -39,8 +39,8 @@ describe('robotk lit', () => {
       ));
 
     it('should lit message successfully', () => {
-      expect(this.room.messages.length).to.equal(3);
-      expect(this.room.messages[2][1]).to.be.oneOf(responses.lit.success);
+      expect(this.room.messages.length).to.equal(2);
+      expect(this.room.messages[1][1]).to.be.oneOf(responses.lit.success);
     });
   });
 });
