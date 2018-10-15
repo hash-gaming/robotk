@@ -5,8 +5,7 @@ module.exports = async function isAdminCheck(req, res, next) {
 
   if (await isUserAdmin(token, req.body.user_id)) {
     next();
-  }
-  else {
+  } else {
     res.send('This command is only available to owners and admins.');
   }
 };

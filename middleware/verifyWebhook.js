@@ -3,8 +3,7 @@ module.exports = function verifyIncomingWebhook(req, res, next) {
 
   if (req.body.token === verificationToken) {
     next();
-  }
-  else {
+  } else {
     res.send(403);
   }
 };

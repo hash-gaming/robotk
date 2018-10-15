@@ -14,10 +14,13 @@ describe('robotk pugme', () => {
   });
 
   context('user requests to pug them', () => {
-    beforeEach(() => co(function* userSay() {
-      yield this.room.user.say('alice', '@hubot pug me');
-      yield new Promise(resolve => setTimeout(resolve, 1000)); // Damn it yash.
-    }.bind(this)));
+    beforeEach(() =>
+      co(
+        function* userSay() {
+          yield this.room.user.say('alice', '@hubot pug me');
+          yield new Promise(resolve => setTimeout(resolve, 1000)); // Damn it yash.
+        }.bind(this)
+      ));
 
     it('should reply to the user with a pug pic', () => {
       expect(this.room.messages.length).to.equal(2);
@@ -26,10 +29,13 @@ describe('robotk pugme', () => {
   });
 
   context('user requests to pug bomb them', () => {
-    beforeEach(() => co(function* userSay() {
-      yield this.room.user.say('alice', '@hubot pug bomb 3');
-      yield new Promise(resolve => setTimeout(resolve, 1000)); // Damn it yash.
-    }.bind(this)));
+    beforeEach(() =>
+      co(
+        function* userSay() {
+          yield this.room.user.say('alice', '@hubot pug bomb 3');
+          yield new Promise(resolve => setTimeout(resolve, 1000)); // Damn it yash.
+        }.bind(this)
+      ));
 
     it('should reply to the user with a wave of pug pics', () => {
       expect(this.room.messages.length).to.equal(4);

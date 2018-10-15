@@ -15,9 +15,12 @@ describe('robotk lit', () => {
   });
 
   context('user requires robotk to lit invalid content', () => {
-    beforeEach(() => co(function* userSay() {
-      yield this.room.user.say('alice', '@hubot lit that');
-    }.bind(this)));
+    beforeEach(() =>
+      co(
+        function* userSay() {
+          yield this.room.user.say('alice', '@hubot lit that');
+        }.bind(this)
+      ));
 
     it('should fail to lit message due to incorrect syntax', () => {
       expect(this.room.messages.length).to.equal(2);
@@ -28,13 +31,16 @@ describe('robotk lit', () => {
   context('user requires robotk to lit url', () => {
     const url = 'https://hashtaggaming.slack.com/archives/test';
 
-    beforeEach(() => co(function* userSay() {
-      yield this.room.user.say('alice', `@hubot lit ${url}`);
-    }.bind(this)));
+    beforeEach(() =>
+      co(
+        function* userSay() {
+          yield this.room.user.say('alice', `@hubot lit ${url}`);
+        }.bind(this)
+      ));
 
     it('should lit message successfully', () => {
-      expect(this.room.messages.length).to.equal(3);
-      expect(this.room.messages[2][1]).to.be.oneOf(responses.lit.success);
+      expect(this.room.messages.length).to.equal(2);
+      expect(this.room.messages[1][1]).to.be.oneOf(responses.lit.success);
     });
   });
 });

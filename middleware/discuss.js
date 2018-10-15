@@ -13,38 +13,49 @@ const { automod } = require('../support/strings');
 module.exports = async function discuss(req, res) {
   const { userName, fudgeFactor } = parseCommand(req.body.text);
   if (!userName) {
-    res.send('You didn\'t give me a user, try the command again with an `@user`.');
+    res.send(
+      "You didn't give me a user, try the command again with an `@user`."
+    );
     return;
   }
   const channelName = `discuss_${userName}`;
   const { SLACK_API_TOKEN } = process.env;
 
-  const describeResponse = await describeGroup(SLACK_API_TOKEN, req.body.channel_id);
+  const describeResponse = await describeGroup(
+    SLACK_API_TOKEN,
+    req.body.channel_id
+  );
 
   if (!describeResponse.ok && describeResponse.error === 'channel_not_found') {
     res.send('This is a public channel, just invite yo!');
-  }
-  else {
+  } else {
     let discussionGroup;
 
     try {
-      discussionGroup = await createOrUnarchiveGroup(SLACK_API_TOKEN, channelName, fudgeFactor);
-    }
-    catch (e) {
+      discussionGroup = await createOrUnarchiveGroup(
+        SLACK_API_TOKEN,
+        channelName,
+        fudgeFactor
+      );
+    } catch (e) {
       if (e.message === 'SLACK_IS_DUMB') {
         res.send(automod.slackIsDumb);
         return;
       }
     }
 
-    describeResponse.group.members.map(m => inviteUser(SLACK_API_TOKEN, discussionGroup.id, m));
-    res.send([
-      'Creating private group to discuss.',
-      'Psst. Copy and paste this message into the discussion.',
-      '```',
-      automod.pollMessage.replace(/#{MEMBER_NAME}/g, userName),
-      '```'
-    ].join('\n'));
+    describeResponse.group.members.map(m =>
+      inviteUser(SLACK_API_TOKEN, discussionGroup.id, m)
+    );
+    res.send(
+      [
+        'Creating private group to discuss.',
+        'Psst. Copy and paste this message into the discussion.',
+        '```',
+        automod.pollMessage.replace(/#{MEMBER_NAME}/g, userName),
+        '```'
+      ].join('\n')
+    );
 
     await setPurpose(
       SLACK_API_TOKEN,

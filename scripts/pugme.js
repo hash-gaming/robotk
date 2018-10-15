@@ -13,33 +13,32 @@
 
 const request = require('request-promise');
 
-module.exports = (robot) => {
-  robot.respond(/pug me/i, async (msg) => {
+module.exports = robot => {
+  robot.respond(/pug me/i, async msg => {
     try {
       const response = await request({
         url: 'http://pugme.herokuapp.com/random',
         json: true
       });
       msg.send(response.pug);
-    }
-    catch (err) {
+    } catch (err) {
       msg.send('You dun goofed now!');
     }
   });
 
-  robot.respond(/pug bomb( (\d+))?/i, async (msg) => {
-    const count = parseInt(msg.match[2], 10) > 10 ? 10 : parseInt(msg.match[2], 10) || 5;
+  robot.respond(/pug bomb( (\d+))?/i, async msg => {
+    const count =
+      parseInt(msg.match[2], 10) > 10 ? 10 : parseInt(msg.match[2], 10) || 5;
 
     try {
       const response = await request({
         url: `http://pugme.herokuapp.com/bomb?count=${count}`
       });
       response.pugs.forEach(p => msg.send(p));
-    }
-    catch (err) {
+    } catch (err) {
       [...Array(count).keys()]
-      .map(() => 'You dun goofed now!')
-      .forEach(m => msg.send(m));
+        .map(() => 'You dun goofed now!')
+        .forEach(m => msg.send(m));
     }
   });
 };
