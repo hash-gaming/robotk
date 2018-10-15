@@ -9,8 +9,7 @@
     "local-server-start": "docker-compose up --build --force-recreate",
     "local-server-stop": "docker-compose down",
     "start": "./bin/hubot --name robotk",
-    "test": "mocha ./**/*.spec.js",
-    "pre-commit": "lint-staged"
+    "test": "mocha ./**/*.spec.js"
   },
   "dependencies": {
     "dotenv": "6.1.0",
@@ -44,6 +43,11 @@
     "mocha": "5.2.0",
     "nock": "10.0.1",
     "prettier": "1.14.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
